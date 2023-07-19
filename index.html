@@ -14,17 +14,199 @@
         <div class="form__container">
             <!-- Sidebar  -->
             <div class="form__sidebar">
+               
                 <div class="form__sidebar step active">
                     <div class="step__circle">1</div>
                     <div class="step__content">
                         <span>Step 1</span>
                         <b>your info</b>
                     </div>
+                </div> 
 
+                <div class="form__sidebar step">
+                    <div class="step__circle">2</div>
+                    <div class="step__content">
+                        <span>Step 2</span>
+                        <b>Select Plan</b>
+                    </div>
                 </div>
+
+                <div class="form__sidebar step">
+                    <div class="step__circle">3</div>
+                    <div class="step__content">
+                        <span>Step 3</span>
+                        <b>add-ons</b>
+                    </div>
+                </div>
+
+                <div class="form__sidebar step">
+                    <div class="step__circle">4</div>
+                    <div class="step__content">
+                        <span>Step 4</span>
+                        <b>summary</b>
+                    </div>
+                </div>
+
             </div>
+            <!-- Sidebar end -->
+
+            <!-- Step 1 Start -->
+            <div class="steps step-1">
+                <div class="steps__header">
+                     <h1 class="steps__title">Personal info</h1>
+                     <p class="steps__exp">Please provide your name, email address, and phone number.</p>
+                </div>
+                <form>
+
+                    <div class="label">
+                        <label for="name">Name</label>
+                        <p class="error">This field is required</p>
+                    </div>
+                    <input type="text" required id="name" placeholder="e.g. Stephen King">
+                    
+
+                    <div class="label">
+                        <label for="email">Email Address</label>
+                        <p class="error">This field is required</p>
+                    </div>
+                    <input type="text" required id="email" placeholder="e.g. stephenking@lorem.com">
+
+                    <div class="label">
+                        <label for="">Phone Number</label>
+                        <p class="error">This field is required</p>
+                    </div>
+                    <input type="text" required id="phone" placeholder="e.g. +1 234 567 890">
+
+                </form>
+                <div class="steps__buttons">
+                    <button class="steps__next-step" type="submit">Next Step</button>
+                </div>
+           </div>
+                 <!-- Step 1 End -->
+                 <!-- Step 2 Start -->
+              <div class="steps step-2">
+                <div class="steps__header">
+                    <h1 class="steps__title">Select your plan</h1>
+                    <p class="steps__exp">You have the option of monthly or yearly billing.</p>
+               </div>
+                <form>
+                    
+                    <div class="step-2__plan-card selected">
+                        <img src="assets/images/icon-arcade.svg" alt="arcade">
+                        <div class="step-2__plan-card-info chosen">
+                            <b>Arcade</b>
+                            <span class="step-2__plan-card-price">$9/mo</span>
+                        </div>
+                    </div>
+
+                    <div class="step-2__plan-card selected">
+                        <img src="assets/images/icon-advanced.svg" alt="arcade">
+                        <div class="step-2__plan-card-info chosen">
+                            <b>Advanced</b>
+                            <span class="step-2__plan-card-price">$12/mo</span>
+                        </div>
+                    </div>
+
+                    <div class="step-2__plan-card selected">
+                        <img src="assets/images/icon-pro.svg" alt="arcade">
+                        <div class="step-2__plan-card-info chosen">
+                            <b>Pro</b>
+                            <span class="step-2__plan-card-price">$15/mo</span>
+                        </div>
+                    </div>
+
+                </form>
+                <div class="step-2__switcher">
+                    <p class="monthly sw-active">Monthly</p>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                    <p class="yearly">Yearly</p>
+                </div>
+
+                <div class="steps__buttons">
+                    <button class="steps__prev-step" type="submit">Go Back</button>
+                    <button class="steps__next-step" type="submit">Next Step</button>
+                </div>
+
+              </div>
+              <!-- Step 2 End -->
+              <!-- Step 3 Start -->
+              <div class="steps step-3">
+                <div class="steps__header">
+                    <h1 class="steps__title">Pick add-ons</h1>
+                    <p class="steps__exp">Add-ons help enhance your gaming experience.</p>
+                </div>
+                <form>
+                    <div class="step-3__box" data-id="1">
+                        <input type="checkbox" id="online">
+                        <div class="step-3__box description">
+                            <label for="online">Online service</label>
+                            <small>Access to multiplayer games</small>
+                        </div>
+                        <p class="price">+$1/mo</p>
+                    </div>
+
+                    <div class="step-3__box" data-id="2">
+                        <input type="checkbox" id="larger">
+                        <div class="step-3__box description">
+                            <label for="larger">Larger storage</label>
+                            <small>Extra 1TB of cloud save</small>
+                        </div>
+                        <p class="price">+$2/mo</p>
+                    </div>
+
+                    <div class="step-3__box" data-id="3">
+                        <input type="checkbox" id="profile">
+                        <div class="step-3__box description">
+                            <label for="profile">Customizable profile</label>
+                            <small>Custom theme on your profile</small>
+                        </div>
+                        <p class="price">+$2/mo</p>
+                    </div>
+                </form>
+
+                <div class="steps__buttons">
+                    <button class="steps__prev-step" type="submit">Go Back</button>
+                    <button class="steps__next-step" type="submit">Next Step</button>
+                </div>
+
+              </div>
+              <!-- Ste 3 End -->
+              <!-- Step 4 Start -->
+              <div class="steps step-4">
+                <div class="steps__header">
+                    <h1 class="steps__title">Finishing up</h1>
+                    <p class="steps__exp">Double-check everything looks OK before confirming.</p>
+                </div>
+                <div class="step-4__selection-box">
+                    <div class="step-4__selection-container">
+                        <div class="step-4__selected-plan">
+                            <p class="step-4__plan-name">Arcade (Monthly)</p>
+                            <p class="step-4__plan-price">$9/mo</p>
+                        </div>
+                        <hr>
+                        <div class="step-4__addons">
+                            <template>
+                                <div class="step-4__selected-addon">
+                                    <span class="step-4__selected-addon__service-name">Online service</span>
+                                    <span class="set-4__selected-addon__service-price">+$1/mo</span>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                    <p class="step-4__selection-box__total">Total (per month) <b>+$12/mo</b></p>
+                </div>
+                <div class="steps__buttons">
+                    <button class="steps__prev-step" type="submit">Go Back</button>
+                    <button class="steps__next-step" type="submit">Next Step</button>
+                </div>
+              </div>
+              <!-- Step 4 End -->
+              <!-- Step 5 Start -->
         </div>
-    </div>
+    </div>p
 
 </body>
 </html>
