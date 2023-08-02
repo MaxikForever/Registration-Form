@@ -33,6 +33,11 @@ a {
 
 /* utility classes */
 
+.selected {
+    border: 2px solid var(--Purplish-blue);
+    background-color: var(--Magnolia);
+  }
+
 .hidden {
     display: none;
 }
@@ -210,7 +215,8 @@ form input::placeholder {
     display: flex;
     flex: 1;
     align-items: center;
-    gap: 2rem   ;
+    gap: 2rem  
+    ;
 }
 
 .step-2__plan-card{

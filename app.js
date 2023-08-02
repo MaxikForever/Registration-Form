@@ -7,7 +7,7 @@ const addons = document.querySelectorAll(".step-3__box");
 const total = document.querySelector(".step-4__selection-box__total b");
 const planPrice = document.querySelector(".step-4__plan-price");
 
-console.log(`Plan price ${planPrice.innerText}`)
+console.log(formInputs)
 
 let time; 
 let currentStep = 1;
@@ -19,14 +19,14 @@ const obj = {
 };
 
 
-
-
 function summary(obj) {
   const planName = document.querySelector(".step-4__plan-name");
   const planPrice = document.querySelector(".step-4__plan-price")
-  console.log(`obj . price = ${obj.price}`)
+ console.log("planName:", planName.innerText);
+    console.log("planPrice:", planPrice.innerText);
   planPrice.innerHTML = `${obj.price.innerText}`;
   planName.innerHTML = `${obj.plan.innerText} (${obj.kind ? "yearly" : "monthly"})`;
+    
 }
 
 
@@ -37,7 +37,6 @@ function validateForm() {
     if (!formInputs[i].value) {
       valid = false;
       formInputs[i].classList.add("error");
-      console.log(` find label result : ${findLabel(formInputs[i]).nextElementSibling.style.display}`)
       findLabel(formInputs[i]).nextElementSibling.style.display = "flex";
     } else {
       valid = true;
@@ -63,8 +62,8 @@ function findLabel(el) {
 
 
 steps.forEach( step => { 
-  const nextBtn = document.querySelector(".steps__next-step");
-  const prevBtn = document.querySelector(".steps__prev-step");
+  const nextBtn = step.querySelector(".steps__next-step");
+  const prevBtn = step.querySelector(".steps__prev-step");
 
   if(prevBtn) {
     prevBtn.addEventListener("click", () => {
@@ -85,7 +84,6 @@ steps.forEach( step => {
       setTotal();
     }
     document.querySelector(`.step-${currentStep}`).style.display= "flex";
-    console.log(` circle steps ${circleSteps[currentCircle].classList}`)
     circleSteps[currentCircle].classList.add("active");
     obj.price = planPrice.innerHTML;
     summary(obj)
@@ -93,3 +91,103 @@ steps.forEach( step => {
 
 })
 
+
+plans.forEach( (plan) => {
+  plan.addEventListener("click", () => {
+    document.querySelector(".selected").classList.remove("selected");
+    plan.classList.add("selected")
+    const planName = plan.querySelector("b");
+    const planPrice = plan.querySelector(".step-2__plan-card-price");
+    console.log(`paln name = ${planName.innerText}`)
+    console.log(`paln price = ${plan.querySelector(".step-2__plan-card-price")}`)
+    obj.plan = planName;
+    obj.price = planPrice.innerText;
+  })
+})
+
+
+switcher.addEventListener("click", () => {
+  const val = switcher.querySelector("input").checked;
+  if (val) {
+    document.querySelector(".monthly").classList.remove("sw-active");
+    document.querySelector(".yearly").classList.add("sw-active");
+  } else {
+    document.querySelector(".monthly").classList.add("sw-active");
+    document.querySelector(".yearly").classList.remove("sw-active");
+  }
+  switchPrice(val)
+  obj.kind = val; 
+})
+
+addons.forEach( (addon) => {
+  addon.addEventListener("click", (e) => {
+    const addonSelect = addon.querySelector("input");
+    const ID = addon.getAttribute("data-id");
+    if (addonSelect.checked){
+      addonSelect.checked = false; 
+      addon.classList.remove("ad-selected");
+      showAddon(ID, false);
+    } else {
+      addonSelect.checked = true;
+      addon.classList.add("ad-selected");
+      showAddon(ID, true)
+      e.preventDefault();
+    }
+  })
+})
+
+function switchPrice(checked) {
+  const yearlyPrice = [90, 120, 150];
+  const monthlyPrice = [9, 12, 15];
+  const prices = document.querySelectorAll(".step-4__selected-addon__service-price");
+  if (checked) {
+    prices[0].innerHTML = `${yearlyPrice[0]}/yr`
+    prices[1].innerHTML = `${yearlyPrice[1]}/yr`
+    prices[2].innerHTML = `${yearlyPrice[2]}/yr`
+    setTime(true);
+  } else {
+    prices[0].innerHTML = `${monthlyPrice[0]}/mo`
+    prices[1].innerHTML = `${monthlyPrice[1]}/mo`
+    prices[2].innerHTML = `${monthlyPrice[2]}/mo`
+    setTime(fale);
+  }
+}
+
+function showAddon(ad, val) {
+  const temp = document.getElementsByTagName("template")[0];
+  const clone = temp.content.cloneNode(true);
+  const serviceName = clone.querySelector(".step-4__selected-addon__service-name");
+  const servicePrice = clone.querySelector("step-4__selected-addon__service-price");
+  const serviceID = clone.querySelector("step-4__selected-addon");
+  if (ad && val) {
+    serviceName.innerText = ad.querySelector("label").innerText;
+    servicePrice.innerText = ad.querySelector(".price").innerText;
+    serviceID.setAttribute("data-id", ad.dataset.id);
+    document.querySelectorAll(".step-4__addons").appendChild(clone);
+  } else {
+    const addons = document.querySelectorAll(".step-4__selected-addon")
+    addons.forEach((addon) => {
+      const attr = addon.getAttribute("data-id");
+      if (attr == ad) {
+        addon.remove();
+      }
+    })
+  } 
+}
+
+function setTotal() {
+  const str = planPrice.innerHTML;
+  const res = str.replace(/\D/g, "");
+  const addonPrices = document.querySelectorAll(".step-4__selected-addon__service-price");
+  let val = 0;
+  for (let i = 0; i < addonPrices.length; i++) {
+  const str = addonPrices[i].innerHTML;
+  const res = str.replace(/\D/g, "");
+    val += Number(res);
+  }
+  total.innerHTML = `$${val + Number(res)}/${time?"yr":"mo"};`
+}
+
+function setTime(t) {
+  return time = t;
+}
