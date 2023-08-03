@@ -22,11 +22,11 @@ const obj = {
 function summary(obj) {
   const planName = document.querySelector(".step-4__plan-name");
   const planPrice = document.querySelector(".step-4__plan-price")
- console.log("planName:", planName.innerText);
-    console.log("planPrice:", planPrice.innerText);
+  console.log(" object planPrice:", obj.price.innerText);
   planPrice.innerHTML = `${obj.price.innerText}`;
   planName.innerHTML = `${obj.plan.innerText} (${obj.kind ? "yearly" : "monthly"})`;
-    
+  console.log("planName:", planName.innerText);
+ 
 }
 
 
@@ -36,11 +36,11 @@ function validateForm() {
   
     if (!formInputs[i].value) {
       valid = false;
-      formInputs[i].classList.add("error");
+      formInputs[i].classList.add("err");
       findLabel(formInputs[i]).nextElementSibling.style.display = "flex";
     } else {
       valid = true;
-      formInputs[i].classList.remove("error");
+      formInputs[i].classList.remove("err");
      
       findLabel(formInputs[i]).nextElementSibling.style.display = "none";
     }
@@ -85,10 +85,8 @@ steps.forEach( step => {
     }
     document.querySelector(`.step-${currentStep}`).style.display= "flex";
     circleSteps[currentCircle].classList.add("active");
-    obj.price = planPrice.innerHTML;
     summary(obj)
   })
-
 })
 
 
@@ -98,10 +96,8 @@ plans.forEach( (plan) => {
     plan.classList.add("selected")
     const planName = plan.querySelector("b");
     const planPrice = plan.querySelector(".step-2__plan-card-price");
-    console.log(`paln name = ${planName.innerText}`)
-    console.log(`paln price = ${plan.querySelector(".step-2__plan-card-price")}`)
     obj.plan = planName;
-    obj.price = planPrice.innerText;
+    obj.price = planPrice;
   })
 })
 
@@ -130,7 +126,8 @@ addons.forEach( (addon) => {
     } else {
       addonSelect.checked = true;
       addon.classList.add("ad-selected");
-      showAddon(ID, true)
+      console.log(`Class list of addon ${addon.classList}`)
+      showAddon(addon, true)
       e.preventDefault();
     }
   })
@@ -139,7 +136,7 @@ addons.forEach( (addon) => {
 function switchPrice(checked) {
   const yearlyPrice = [90, 120, 150];
   const monthlyPrice = [9, 12, 15];
-  const prices = document.querySelectorAll(".step-4__selected-addon__service-price");
+  const prices = document.querySelectorAll(".step-2__plan-card-price");
   if (checked) {
     prices[0].innerHTML = `${yearlyPrice[0]}/yr`
     prices[1].innerHTML = `${yearlyPrice[1]}/yr`
@@ -149,21 +146,22 @@ function switchPrice(checked) {
     prices[0].innerHTML = `${monthlyPrice[0]}/mo`
     prices[1].innerHTML = `${monthlyPrice[1]}/mo`
     prices[2].innerHTML = `${monthlyPrice[2]}/mo`
-    setTime(fale);
+    setTime(false);
   }
 }
 
 function showAddon(ad, val) {
+  console.log(`ad from show addon ${ad}\n val from addon ${val}`)
   const temp = document.getElementsByTagName("template")[0];
   const clone = temp.content.cloneNode(true);
   const serviceName = clone.querySelector(".step-4__selected-addon__service-name");
-  const servicePrice = clone.querySelector("step-4__selected-addon__service-price");
-  const serviceID = clone.querySelector("step-4__selected-addon");
+  const servicePrice = clone.querySelector(".step-4__selected-addon__service-price");
+  const serviceID = clone.querySelector(".step-4__selected-addon");
   if (ad && val) {
     serviceName.innerText = ad.querySelector("label").innerText;
     servicePrice.innerText = ad.querySelector(".price").innerText;
     serviceID.setAttribute("data-id", ad.dataset.id);
-    document.querySelectorAll(".step-4__addons").appendChild(clone);
+    document.querySelector(".step-4__addons").appendChild(clone);
   } else {
     const addons = document.querySelectorAll(".step-4__selected-addon")
     addons.forEach((addon) => {
@@ -185,8 +183,11 @@ function setTotal() {
   const res = str.replace(/\D/g, "");
     val += Number(res);
   }
-  total.innerHTML = `$${val + Number(res)}/${time?"yr":"mo"};`
+
+  total.innerHTML = `$${val + Number(res)}/${time?"yr":"mo"}`;
+  console.log(` total price - ${total.innerText}`)
 }
+
 
 function setTime(t) {
   return time = t;

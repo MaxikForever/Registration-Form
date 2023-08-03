@@ -33,6 +33,11 @@ a {
 
 /* utility classes */
 
+.ad-selected {
+    border: 1px solid var(--Purplish-blue);
+    background-color: var(--Magnolia);
+  }
+
 .selected {
     border: 2px solid var(--Purplish-blue);
     background-color: var(--Magnolia);
@@ -97,10 +102,11 @@ div[class = "form__sidebar"]  {
     color: var(--Marine-blue) !important;
 }
 
-/* .error {
-    border: 2px solid var(--Strawberry-red) !important 
-} */
+.err {
+    border: 2px solid var(--Strawberry-red) !important;
+  }
 
+  
 .step {
     display: flex;
     align-items: center;
@@ -197,7 +203,7 @@ form input::placeholder {
     font-family: inherit;
 }
 
-.form .error {
+form .error {
     display: none;
     color: var(--Strawberry-red);
     font-size: .9rem;
@@ -350,15 +356,16 @@ input:checked + .slider::before {
 
 }
 
-div[class="step-3__box"]  {
+.step-3__box {
     border: 1px solid var(--Cool-gray);
     border-radius: 10px;
     padding: 1rem;
-
     display: flex;
     align-items: center;
     cursor: pointer;
 }
+
+
 
 .description {
     display: flex;
@@ -410,6 +417,8 @@ div[class="step-3__box"]  {
     justify-content: center;
     flex: 1;
 }
+
+
 
 .step-4__selection-container {
     background-color: var(--Magnolia);
