@@ -38,6 +38,7 @@ function validateForm() {
       valid = false;
       formInputs[i].classList.add("err");
       findLabel(formInputs[i]).nextElementSibling.style.display = "flex";
+      return valid;
     } else {
       valid = true;
       formInputs[i].classList.remove("err");
